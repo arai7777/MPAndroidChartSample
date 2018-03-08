@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MPAndroidChartSample</string>
+
+    <string name="StaticLineGraph_Description">StaticLineGraphSample</string>
+
+    <string-array name="SampleLists">
+        <item>StaticLineGraph</item>
+    </string-array>
 </resources>
