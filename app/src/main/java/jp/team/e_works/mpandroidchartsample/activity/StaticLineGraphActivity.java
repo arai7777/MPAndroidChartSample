@@ -3,16 +3,14 @@ package jp.team.e_works.mpandroidchartsample.activity;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.listener.ChartTouchListener;
-import com.github.mikephil.charting.listener.OnChartGestureListener;
 
 import java.util.ArrayList;
 
@@ -70,67 +68,33 @@ public class StaticLineGraphActivity extends AppCompatActivity {
         // Y軸(右)は表示しない
         mLineChart.getAxisRight().setEnabled(false);
 
-        setData(10, 5);
+        // X軸の設定
+        XAxis xAxis = mLineChart.getXAxis();
+        // X軸の最大値設定
+        xAxis.setAxisMaximum(100f);
+        // X軸の最小値設定
+        xAxis.setAxisMinimum(0f);
 
-        mLineChart.setOnChartGestureListener(mChartGestureListener);
+        setData(100, 1);
     }
 
-    private OnChartGestureListener mChartGestureListener = new OnChartGestureListener() {
-        @Override
-        public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
-            Log.d("OnChartGestureListener#onChartGestureStart(" + me.toString()
-                    + ", ChartGesture" + lastPerformedGesture.toString() + ")");
-        }
-
-        @Override
-        public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
-            Log.d("OnChartGestureListener#onChartGestureEnd(" + me.toString()
-                    + ", ChartGesture" + lastPerformedGesture.toString() + ")");
-        }
-
-        @Override
-        public void onChartLongPressed(MotionEvent me) {
-            Log.d("OnChartGestureListener#onChartLongPressed(" + me.toString() + ")");
-        }
-
-        @Override
-        public void onChartDoubleTapped(MotionEvent me) {
-            Log.d("OnChartGestureListener#onChartDoubleTapped(" + me.toString() + ")");
-        }
-
-        @Override
-        public void onChartSingleTapped(MotionEvent me) {
-            Log.d("OnChartGestureListener#onChartSingleTapped(" + me.toString() + ")");
-        }
-
-        @Override
-        public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
-            Log.d("OnChartGestureListener#onChartFling(" + me1.toString() + ", " + me2.toString()
-                    + ", " + velocityX + ", " + velocityY + ")");
-        }
-
-        @Override
-        public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
-            Log.d("OnChartGestureListener#onChartScale(" + me.toString() + ", " + scaleX + ", " + scaleY + ")");
-        }
-
-        @Override
-        public void onChartTranslate(MotionEvent me, float dX, float dY) {
-            Log.d("OnChartGestureListener#onChartTranslate(" + me.toString() + ", " + dX + ", " + dY + ")");
-        }
-    };
-
+    // グラフに描画するデータを設定する
     private void setData(int itemCount, int range) {
         ArrayList<Entry> datas = new ArrayList<>(itemCount);
         for(int i = 0; i < itemCount; i++) {
-            // 適当に数値を生成
-            float val = (float) (Math.random() * range) - 5;
+            // 数値を生成
+            float val = (float) (Math.sin((Math.PI / 10) * i) * range);
             // (x, y) = (i, val)として座標データをセット
             datas.add(new Entry(i, val));
         }
 
         // 第一引数にデータ、第二引数にラベル名を設定する
-        LineDataSet lineDataSet = new LineDataSet(datas, "sample Data");
+        LineDataSet lineDataSet = new LineDataSet(datas, getResources().getString(R.string.sine_wave).toString());
+
+        // 値のプロット点を描かない
+        lineDataSet.setDrawCircles(false);
+        // 線の色設定
+        lineDataSet.setColor(Color.rgb(0xb9, 0x40, 0x47));
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(lineDataSet);
