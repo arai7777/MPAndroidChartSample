@@ -20,6 +20,9 @@
         <activity
             android:name=".activity.StaticLineGraphActivity"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.StaticMultiLineGraphActivity"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

@@ -39,6 +39,13 @@ public class SampleListActivity extends AppCompatActivity {
                     startActivity(intent);
                     break;
                 }
+                case 1:     // StaticMultiLineGraph
+                {
+                    Log.d("go to StaticMultiLineGraphActivity");
+                    Intent intent = new Intent(SampleListActivity.this, StaticMultiLineGraphActivity.class);
+                    startActivity(intent);
+                    break;
+                }
                 default:
                     // pass
                     break;

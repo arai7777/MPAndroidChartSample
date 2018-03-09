@@ -1,7 +1,7 @@
 package jp.team.e_works.mpandroidchartsample.activity;
 
+import android.app.Activity;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -15,34 +15,31 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import java.util.ArrayList;
 
 import jp.team.e_works.mpandroidchartsample.R;
-import jp.team.e_works.mpandroidchartsample.util.Log;
 
-public class StaticLineGraphActivity extends AppCompatActivity {
+public class StaticMultiLineGraphActivity extends Activity {
     private LineChart mLineChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_static_line_graph);
+        setContentView(R.layout.activity_static_multi_line_graph);
 
-        // グラフViewを初期化する
+        // グラフViewの初期化をする
         initChart();
 
         // グラフに値をセットする
         setData(100, 1);
     }
 
-    /**
-     * グラフViewの初期化
-     */
+    // グラフViewの初期化
     private void initChart() {
         // 線グラフView
-        mLineChart = (LineChart) findViewById(R.id.chart_StaticLineGraph);
+        mLineChart = (LineChart) findViewById(R.id.chart_StaticMultiLineGraph);
 
         // グラフ説明テキストを表示するか
         mLineChart.getDescription().setEnabled(true);
         // グラフ説明テキストのテキスト設定
-        mLineChart.getDescription().setText(getResources().getString(R.string.StaticLineGraph_Description));
+        mLineChart.getDescription().setText(getResources().getString(R.string.StaticMultiGraph_Description));
         // グラフ説明テキストの文字色設定
         mLineChart.getDescription().setTextColor(Color.BLACK);
         // グラフ説明テキストの文字サイズ設定
@@ -91,24 +88,38 @@ public class StaticLineGraphActivity extends AppCompatActivity {
      * グラフに描画するデータを設定
      */
     private void setData(int itemCount, int range) {
-        ArrayList<Entry> datas = new ArrayList<>(itemCount);
+        ArrayList<Entry> sinDatas = new ArrayList<>(itemCount);
+        ArrayList<Entry> cosDatas = new ArrayList<>(itemCount);
+        ArrayList<Entry> tanDatas = new ArrayList<>(itemCount);
         for(int i = 0; i < itemCount; i++) {
             // 数値を生成
-            float val = (float) (Math.sin((Math.PI / 10) * i) * range);
+            float sinVal = (float) (Math.sin((Math.PI / 10) * i) * range);
+            float cosVal = (float) (Math.cos((Math.PI / 10) * i) * range);
+            float tanVal = (float) (Math.tan((Math.PI / 10) * i) * range);
             // (x, y) = (i, val)として座標データをセット
-            datas.add(new Entry(i, val));
+            sinDatas.add(new Entry(i, sinVal));
+            cosDatas.add(new Entry(i, cosVal));
+            tanDatas.add(new Entry(i, tanVal));
         }
 
         // 第一引数にデータ、第二引数にラベル名を設定する
-        LineDataSet lineDataSet = new LineDataSet(datas, getResources().getString(R.string.sine_wave));
+        LineDataSet sinLineDataSet = new LineDataSet(sinDatas, getResources().getString(R.string.sine_wave));
+        LineDataSet cosLineDataSet = new LineDataSet(cosDatas, getResources().getString(R.string.cosine_wave));
+        LineDataSet tanLineDataSet = new LineDataSet(tanDatas, getResources().getString(R.string.tangent_wave));
 
         // 値のプロット点を描かない
-        lineDataSet.setDrawCircles(false);
+        sinLineDataSet.setDrawCircles(false);
+        cosLineDataSet.setDrawCircles(false);
+        tanLineDataSet.setDrawCircles(false);
         // 線の色設定
-        lineDataSet.setColor(Color.rgb(0xb9, 0x40, 0x47));
+        sinLineDataSet.setColor(Color.rgb(255, 0, 0));
+        cosLineDataSet.setColor(Color.rgb(0, 255, 0));
+        tanLineDataSet.setColor(Color.rgb(0, 0, 255));
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(lineDataSet);
+        dataSets.add(sinLineDataSet);
+        dataSets.add(cosLineDataSet);
+        dataSets.add(tanLineDataSet);
         LineData lineData = new LineData(dataSets);
         mLineChart.setData(lineData);
     }
