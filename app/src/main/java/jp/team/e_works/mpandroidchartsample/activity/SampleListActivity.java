@@ -3,6 +3,7 @@ package jp.team.e_works.mpandroidchartsample.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,6 +21,9 @@ public class SampleListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample_list);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_sampleList);
+        setSupportActionBar(toolbar);
+
         mSampleLists = getResources().getStringArray(R.array.SampleLists);
 
         ListView sampleListView = (ListView) findViewById(R.id.list_samples);
@@ -35,14 +39,21 @@ public class SampleListActivity extends AppCompatActivity {
                 case 0:     // StaticLineGraph
                 {
                     Log.d("go to StaticLineGraphActivity");
-                    Intent intent = new Intent(SampleListActivity.this, StaticLineGraphActivity.class);
+                    Intent intent = new Intent(getApplication(), StaticLineGraphActivity.class);
                     startActivity(intent);
                     break;
                 }
                 case 1:     // StaticMultiLineGraph
                 {
                     Log.d("go to StaticMultiLineGraphActivity");
-                    Intent intent = new Intent(SampleListActivity.this, StaticMultiLineGraphActivity.class);
+                    Intent intent = new Intent(getApplication(), StaticMultiLineGraphActivity.class);
+                    startActivity(intent);
+                    break;
+                }
+                case 2:     // DynamicLineGraph
+                {
+                    Log.d("go to StaticMultiLineGraphActivity");
+                    Intent intent = new Intent(getApplication(), DynamicLineGraphActivity.class);
                     startActivity(intent);
                     break;
                 }

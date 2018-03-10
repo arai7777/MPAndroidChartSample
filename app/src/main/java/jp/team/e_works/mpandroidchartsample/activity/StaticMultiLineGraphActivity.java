@@ -1,8 +1,9 @@
 package jp.team.e_works.mpandroidchartsample.activity;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -16,13 +17,16 @@ import java.util.ArrayList;
 
 import jp.team.e_works.mpandroidchartsample.R;
 
-public class StaticMultiLineGraphActivity extends Activity {
+public class StaticMultiLineGraphActivity extends AppCompatActivity {
     private LineChart mLineChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_static_multi_line_graph);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_staticMultiLineGraph);
+        setSupportActionBar(toolbar);
 
         // グラフViewの初期化をする
         initChart();
@@ -39,7 +43,7 @@ public class StaticMultiLineGraphActivity extends Activity {
         // グラフ説明テキストを表示するか
         mLineChart.getDescription().setEnabled(true);
         // グラフ説明テキストのテキスト設定
-        mLineChart.getDescription().setText(getResources().getString(R.string.StaticMultiGraph_Description));
+        mLineChart.getDescription().setText(getResources().getString(R.string.StaticMultiLineGraph_Description));
         // グラフ説明テキストの文字色設定
         mLineChart.getDescription().setTextColor(Color.BLACK);
         // グラフ説明テキストの文字サイズ設定

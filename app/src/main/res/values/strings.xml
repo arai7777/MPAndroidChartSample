@@ -2,7 +2,8 @@
     <string name="app_name">MPAndroidChartSample</string>
 
     <string name="StaticLineGraph_Description">StaticLineGraphSample</string>
-    <string name="StaticMultiGraph_Description">StaticMultiLineGraphSample</string>
+    <string name="StaticMultiLineGraph_Description">StaticMultiLineGraphSample</string>
+    <string name="DynamicLineGraph_Description">DynamicLineGraphSample</string>
 
     <string name="sine_wave">Sine Wave</string>
     <string name="cosine_wave">Cosine Wave</string>
@@ -11,5 +12,6 @@
     <string-array name="SampleLists">
         <item>StaticLineGraph</item>
         <item>StaticMultiLineGraph</item>
+        <item>DynamicLineGraph</item>
     </string-array>
 </resources>

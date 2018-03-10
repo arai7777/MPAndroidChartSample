@@ -1,8 +1,9 @@
 package jp.team.e_works.mpandroidchartsample.activity;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -24,6 +25,9 @@ public class StaticLineGraphActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_static_line_graph);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_staticLineGraph);
+        setSupportActionBar(toolbar);
 
         // グラフViewを初期化する
         initChart();

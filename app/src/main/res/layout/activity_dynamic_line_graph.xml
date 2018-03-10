@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/activity_static_multi_line_graph"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/zero_padding"
-    android:paddingLeft="@dimen/zero_padding"
-    android:paddingRight="@dimen/zero_padding"
-    android:paddingTop="@dimen/zero_padding"
-    tools:context="jp.team.e_works.mpandroidchartsample.activity.StaticMultiLineGraphActivity">
+    tools:context="jp.team.e_works.mpandroidchartsample.activity.DynamicLineGraphActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_staticMultiLineGraph"
+        android:id="@+id/toolbar_dynamicLineGraph"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
@@ -22,9 +17,9 @@
         app:titleTextColor="@color/white"/>
 
     <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/chart_StaticMultiLineGraph"
+        android:id="@+id/chart_DynamicLineGraph"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_staticMultiLineGraph"/>
+        android:layout_below="@id/toolbar_dynamicLineGraph"/>
 
 </RelativeLayout>
