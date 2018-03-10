@@ -19,7 +19,7 @@ import com.github.mikephil.charting.utils.ViewPortHandler;
 import jp.team.e_works.mpandroidchartsample.R;
 import jp.team.e_works.mpandroidchartsample.util.Log;
 
-public class DynamicLineGraphActivity extends AppCompatActivity {
+public class DynamicMultiLineGraphActivity extends AppCompatActivity {
     // LineChartView
     private LineChart mLineChart;
 
@@ -32,9 +32,9 @@ public class DynamicLineGraphActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dynamic_line_graph);
+        setContentView(R.layout.activity_dynamic_multi_line_graph);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_dynamicLineGraph);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_dynamicMultiLineGraph);
         setSupportActionBar(toolbar);
 
         // グラフViewを初期化する
@@ -67,12 +67,12 @@ public class DynamicLineGraphActivity extends AppCompatActivity {
      */
     private void initChart() {
         // 線グラフView
-        mLineChart = (LineChart) findViewById(R.id.chart_DynamicLineGraph);
+        mLineChart = (LineChart) findViewById(R.id.chart_DynamicMultiLineGraph);
 
         // グラフ説明テキストを表示するか
         mLineChart.getDescription().setEnabled(true);
         // グラフ説明テキストのテキスト設定
-        mLineChart.getDescription().setText(getResources().getString(R.string.DynamicLineGraph_Description));
+        mLineChart.getDescription().setText(getResources().getString(R.string.DynamicMultiLineGraph_Description));
         // グラフ説明テキストの文字色設定
         mLineChart.getDescription().setTextColor(Color.BLACK);
         // グラフ説明テキストの文字サイズ設定
@@ -145,24 +145,37 @@ public class DynamicLineGraphActivity extends AppCompatActivity {
         }
 
         // 0番目の線を取得
-        LineDataSet lineDataSet = (LineDataSet) lineData.getDataSetByIndex(0);
+        LineDataSet sinLineDataSet = (LineDataSet) lineData.getDataSetByIndex(0);
         // 0番目の線が初期化されていない場合は初期化する
-        if(lineDataSet == null) {
+        if(sinLineDataSet == null) {
             // LineDataSetオブジェクト生成
-            lineDataSet = new LineDataSet(null, getResources().getString(R.string.sine_wave));
+            sinLineDataSet = new LineDataSet(null, getResources().getString(R.string.sine_wave));
             // 線の色設定
-            lineDataSet.setColor(Color.rgb(0xb9, 0x40, 0x47));
+            sinLineDataSet.setColor(Color.rgb(0xFF, 0x00, 0x00));
             // 線にプロット値の点を描画しない
-            lineDataSet.setDrawCircles(false);
+            sinLineDataSet.setDrawCircles(false);
             // 線にプロット値の値テキストを描画しない
-            lineDataSet.setDrawValues(false);
+            sinLineDataSet.setDrawValues(false);
             // 線を追加
-            lineData.addDataSet(lineDataSet);
+            lineData.addDataSet(sinLineDataSet);
         }
         // y値を作成
-        float val = (float) Math.sin((Math.PI / 10) * mX);
+        float sinVal = (float) Math.sin((Math.PI / 10) * mX);
         // 0番目の線に値を追加
-        lineData.addEntry(new Entry(mX, val), 0);
+        lineData.addEntry(new Entry(mX, sinVal), 0);
+
+        // 1番目の線を取得
+        LineDataSet cosLineDataSet = (LineDataSet) lineData.getDataSetByIndex(1);
+        // 0番目の線とやっていることは同じなので、説明は略
+        if(cosLineDataSet == null) {
+            cosLineDataSet = new LineDataSet(null, getResources().getString(R.string.cosine_wave));
+            cosLineDataSet.setColor(Color.rgb(0x00, 0xFF, 0x00));
+            cosLineDataSet.setDrawCircles(false);
+            cosLineDataSet.setDrawValues(false);
+            lineData.addDataSet(cosLineDataSet);
+        }
+        float cosVal = (float) Math.cos((Math.PI / 10) * mX);
+        lineData.addEntry(new Entry(mX, cosVal), 1);
 
         // 値更新通知
         mLineChart.notifyDataSetChanged();

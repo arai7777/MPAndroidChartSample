@@ -52,8 +52,15 @@ public class SampleListActivity extends AppCompatActivity {
                 }
                 case 2:     // DynamicLineGraph
                 {
-                    Log.d("go to StaticMultiLineGraphActivity");
+                    Log.d("go to DynamicLineGraphActivity");
                     Intent intent = new Intent(getApplication(), DynamicLineGraphActivity.class);
+                    startActivity(intent);
+                    break;
+                }
+                case 3:     // DynamicMultiLineGraph
+                {
+                    Log.d("go to DynamicMultiLineGraphActivity");
+                    Intent intent = new Intent(getApplication(), DynamicMultiLineGraphActivity.class);
                     startActivity(intent);
                     break;
                 }

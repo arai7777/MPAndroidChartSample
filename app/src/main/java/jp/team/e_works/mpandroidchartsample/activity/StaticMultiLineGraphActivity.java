@@ -6,11 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.util.ArrayList;
@@ -86,6 +88,24 @@ public class StaticMultiLineGraphActivity extends AppCompatActivity {
         xAxis.setAxisMaximum(100f);
         // X軸の最小値設定
         xAxis.setAxisMinimum(0f);
+        // X軸の値表示設定
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                if(value >= 10) {
+                    // (n * 2)π
+                    if (((int) value % 20) == 0) {
+                        return getResources().getString(R.string.pi_label, ((int) value / 20) * 2);
+                    }
+                    // nπ
+                    else if (((int) value % 10) == 0) {
+                        return getResources().getString(R.string.pi_label, (int) value / 10);
+                    }
+                }
+                // nullを返すと落ちるので、値を書かない場合は空文字を返す
+                return "";
+            }
+        });
     }
 
     /**
