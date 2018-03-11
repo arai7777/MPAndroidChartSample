@@ -64,6 +64,13 @@ public class SampleListActivity extends AppCompatActivity {
                     startActivity(intent);
                     break;
                 }
+                case 4:     // StaticVerticalBarGraph
+                {
+                    Log.d("go to StaticVerticalBarGraph");
+                    Intent intent = new Intent(getApplication(), StaticVerticalBarGraphActivity.class);
+                    startActivity(intent);
+                    break;
+                }
                 default:
                     // pass
                     break;

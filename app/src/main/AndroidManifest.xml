@@ -31,6 +31,9 @@
         <activity
             android:name=".activity.DynamicMultiLineGraphActivity"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.StaticVerticalBarGraphActivity"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>
