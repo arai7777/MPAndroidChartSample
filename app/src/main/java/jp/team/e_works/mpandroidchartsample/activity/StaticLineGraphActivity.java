@@ -4,6 +4,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -16,6 +19,7 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import jp.team.e_works.mpandroidchartsample.R;
 import jp.team.e_works.mpandroidchartsample.util.Log;
@@ -36,6 +40,27 @@ public class StaticLineGraphActivity extends AppCompatActivity {
 
         // グラフに値をセットする
         setData(100, 1);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.static_line_graph_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.staticLineGraphMenu_save:
+                // グラフを画像ファイルとして保存する
+                if(mLineChart != null) {
+                    String saveFileName = getSaveFileName();
+                    mLineChart.saveToGallery(saveFileName, 100);
+                    Toast.makeText(StaticLineGraphActivity.this, "save : " + saveFileName, Toast.LENGTH_LONG).show();
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -135,5 +160,10 @@ public class StaticLineGraphActivity extends AppCompatActivity {
         dataSets.add(lineDataSet);
         LineData lineData = new LineData(dataSets);
         mLineChart.setData(lineData);
+    }
+
+    private String getSaveFileName() {
+        Date d = new Date();
+        return String.format("StaticLineGraph_%tY%tm%td%tH%tM%tS.jpg", d, d, d, d, d, d);
     }
 }
